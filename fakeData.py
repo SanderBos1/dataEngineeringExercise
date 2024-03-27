@@ -35,11 +35,13 @@ class fake_demand:
         city_data = []
         for city in self.cities:
             monthly_capacity = random.randint(800, 1200)
+            order_rates = []
             for product in self.products:
                 order_rate = random.randint(10, 50)
                 order_rate_product = f"{product} throughput rate is {order_rate}"
+                order_rates.append(order_rate_product)
             cost = random.randint(100, 700)
-            row = [f"{city}", f"{cost}", f"{monthly_capacity}", f"{order_rate_product}"]
+            row = [f"{city}", f"{cost}", f"{monthly_capacity}", f"{order_rates}"]
             city_data.append(row)
         location = f'data/mockdataset_cities.csv'
         df = pd.DataFrame(city_data)
