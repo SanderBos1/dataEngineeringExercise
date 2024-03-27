@@ -13,7 +13,7 @@ class fake_demand:
         self.fake = Faker('nl_NL')
 
 
-    def mock_data(self):
+    def mock_data_products(self):
         data = []
         for year in self.years:
             start_date = datetime(year, 1, 1)
@@ -31,13 +31,26 @@ class fake_demand:
             df = pd.DataFrame(data)
             df.to_csv(location)
 
+    def mock_data_cities(self):
+        city_data = []
+        for city in self.cities:
+            monthly_capacity = random.randint(800, 1200)
+            for product in self.products:
+                order_rate = random.randint(10, 50)
+                order_rate_product = f"{product} throughput rate is {order_rate}"
+            cost = random.randint(100, 700)
+            row = [f"{city}", f"{cost}", f"{monthly_capacity}", f"{order_rate_product}"]
+            city_data.append(row)
+        location = f'data/mockdataset_cities.csv'
+        df = pd.DataFrame(city_data)
+        df.to_csv(location)
+
 
 def main():
     """
         @number: How many times a fake row is created.
         @years: a list of years, for each year a dataset is created.
         @products: Define the products that are used by the dataset.
-        @location: Where the csv file is saved.
         @Cities: Where the order came from.
 
     """
@@ -47,7 +60,8 @@ def main():
     cities = ['Eindhoven', 'Delft', "Rotterdam", "Den Haag", "Middelburg"]
 
     fake_dataset_creator = fake_demand(number_rows, years, products, cities)
-    fake_dataset_creator.mock_data()
+    fake_dataset_creator.mock_data_products()
+    fake_dataset_creator.mock_data_cities()
 
 
 
