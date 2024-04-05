@@ -1,2 +1,4 @@
 Faker
 pandas
+fastapi
+uvicorn
