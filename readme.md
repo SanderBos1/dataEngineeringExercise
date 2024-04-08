@@ -12,7 +12,7 @@ It has the following columns
 - city: The city where the order was placed
 - order_date: The date for which the order was placed
 - product: Which product was sold
-- amount: How many of each product where sold
+- amount: How many of each product where sold, -1 indicates a mistake in the data
 
 ## city dataset
 

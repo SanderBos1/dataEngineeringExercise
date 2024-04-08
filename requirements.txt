@@ -1,4 +1,7 @@
 Faker
 pandas
-fastapi
-uvicorn
+azure-eventhub
+azure-identity 
+azure-identity
+python-dotenv
+aiohttp
