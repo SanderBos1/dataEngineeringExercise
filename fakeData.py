@@ -25,9 +25,10 @@ class fakeDemand:
                 customerEmail = self.fake.email(safe=False)
                 orderDate = self.fake.date_between_dates(date_start=startDate, date_end =endDate)
                 productCategory = random.choice(self.productCategories)
-                productName = random.choices([ "NaN", self.products[productCategory][0]], weights = [1 , 10])[0]
-                productId = random.choice(self.products[productCategory])[1]
-                productPrice = random.choices([-1, random.randint(40, 80)] , weights =[2, 10])[0]
+                pickedProduct = random.choice(self.products[productCategory])
+                productName = random.choices([ "NaN", pickedProduct[0]], weights = [1 , 10])[0]
+                productId = pickedProduct[1]
+                productPrice = random.choices([-1, pickedProduct[2]] , weights =[2, 10])[0]
                 row = [customerId, customerName, customerEmail, orderDate,productId,  productName, productCategory, productPrice]
                 data.append(row)
 
@@ -48,10 +49,10 @@ def main():
     years = [2021, 2022,2023]
     productCategories = ["cardGames", "boardGames", "videoGames", "minatureGames"]
     products = {
-        "cardGames": [["magicTheGathering", 1], ["explodingKittens", 2]],
-        "boardGames": [["settlersOfCatan", 3], ["monopoly", 4], ["wingSpan", 5]],
-        "videoGames": [["eu4", 6], ["civ5", 7], ["ageOfEmpires", 8]],
-        "minatureGames": [["warhammer40k", 9], ["warmachine", 10]]
+        "cardGames": [["magicTheGathering", 1, random.randint(40, 80)], ["explodingKittens", 2, random.randint(40, 80)]],
+        "boardGames": [["settlersOfCatan", 3, random.randint(40, 80)], ["monopoly", 4, random.randint(40, 80)], ["wingSpan", 5, random.randint(40, 80)]],
+        "videoGames": [["eu4", 6, random.randint(40, 80)], ["civ5", 7, random.randint(40, 80)], ["ageOfEmpires", 8, random.randint(40, 80)]],
+        "minatureGames": [["warhammer40k", 9, random.randint(40, 80)], ["warmachine", 10, random.randint(40, 80)]]
 
     }
 
