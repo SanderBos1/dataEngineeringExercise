@@ -1,25 +1,17 @@
 # Product dataset generator
 
-This python script is written to be used as a random dataset generator.
-It generates two datasets which are defined below
+This python script is written to be used as a random dataset generator for learning data engineering projects.
+It generates a dataset with the columns defined below. Keep in mind that some columns intentionally have mistakes.
+This is done for learning purposes.
 
-## product dataset
-The product dataset simulate the sales of different products of a fictional company.
-It has the following columns
+## The dataset
 
-- name: The name of a customer
-- email: The email of a customer
-- city: The city where the order was placed
-- order_date: The date for which the order was placed
-- product: Which product was sold
-- amount: How many of each product where sold, -1 indicates a mistake in the data
+- customerId: The Id of a customer. Issue: does not have to be unique
+- customerName: The name of the customer
+- customerEmail: The email of the customer. Issue: can have special characters
+- orderDate:  The date for which a product is ordered 
+- productId: The id of the product that is ordered
+- productName: The name of the ordered product. Issue: Can be Nan, which indicates a mistake
+- productCategory: The category of the ordered product
+- productPrice : The price of the ordered product. Issue: can be -1, which indicates a mistake
 
-## city dataset
-
-The city dataset simulate the cost of the warehouses, its throughput capacity and it storage capacity. 
-It has the following columns:
-
-- city: the name of the city
-- monthly_capacity: How much of each product can be stored
-- order_rate: How many items of each product can be made per hour
-- cost: the cost of the location 

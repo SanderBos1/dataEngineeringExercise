@@ -3,67 +3,60 @@ from datetime import datetime
 import random
 import pandas as pd
 
-class fake_demand:
+class fakeDemand:
 
-    def __init__(self, number, years, products, cities):
+    def __init__(self, number, years, products, productCategories):
         self.number = number
         self.years = years
         self.products=products
-        self.cities = cities
+        self.productCategories = productCategories
         self.fake = Faker('nl_NL')
 
 
-    def mock_data_products(self):
+    def mockData(self):
         data = []
         for year in self.years:
-            start_date = datetime(year, 1, 1)
-            end_date = datetime(year, 12, 31)
+            startDate = datetime(year, 1, 1)
+            endDate = datetime(year, 12, 31)
             location = f'data/mockdataset_{year}.csv'
             for _ in range(self.number):
-                name = self.fake.name()
-                fake_email = self.fake.email()
-                fake_city = random.choice(self.cities)
-                order_date = self.fake.date_between_dates(date_start=start_date, date_end =end_date)
-                product = random.choice(self.products)
-                amount = random.randint(-1, 100)
-                row = [f"{name}", f"{fake_email}", f"{fake_city}", f"{order_date}", f"{product}", f"{amount}"]
+                customerId = self.fake.random_int(min=1, max=self.number)
+                customerName = self.fake.name()
+                customerEmail = self.fake.email(safe=False)
+                orderDate = self.fake.date_between_dates(date_start=startDate, date_end =endDate)
+                productCategory = random.choice(self.productCategories)
+                productName = random.choices([ "NaN", self.products[productCategory][0]], weights = [1 , 10])[0]
+                productId = random.choice(self.products[productCategory])[1]
+                productPrice = random.choices([-1, random.randint(40, 80)] , weights =[2, 10])[0]
+                row = [customerId, customerName, customerEmail, orderDate,productId,  productName, productCategory, productPrice]
                 data.append(row)
-            df = pd.DataFrame(data)
-            df.to_csv(location)
 
-    def mock_data_cities(self):
-        city_data = []
-        for city in self.cities:
-            monthly_capacity = random.randint(800, 1200)
-            order_rates = []
-            for product in self.products:
-                order_rate = random.randint(10, 50)
-                order_rate_product = f"{product} throughput rate is {order_rate}"
-                order_rates.append(order_rate_product)
-            cost = random.randint(100, 700)
-            row = [f"{city}", f"{cost}", f"{monthly_capacity}", f"{order_rates}"]
-            city_data.append(row)
-        location = f'data/mockdataset_cities.csv'
-        df = pd.DataFrame(city_data)
-        df.to_csv(location)
+            df = pd.DataFrame(data)
+            df.to_csv(location, index=False)
+
 
 
 def main():
     """
         @number: How many times a fake row is created.
         @years: a list of years, for each year a dataset is created.
-        @products: Define the products that are used by the dataset.
-        @Cities: Where the order came from.
+        @products: Define the product that are used by the dataset.
+        @productCategories: Define the product categories that are used by the dataset.
 
     """
-    number_rows = 3000
+    numberRows = 3000
     years = [2021, 2022,2023]
-    products = ['orange', 'apple', 'banana', 'pear']
-    cities = ['Eindhoven', 'Delft', "Rotterdam", "Den Haag", "Middelburg"]
+    productCategories = ["cardGames", "boardGames", "videoGames", "minatureGames"]
+    products = {
+        "cardGames": [["magicTheGathering", 1], ["explodingKittens", 2]],
+        "boardGames": [["settlersOfCatan", 3], ["monopoly", 4], ["wingSpan", 5]],
+        "videoGames": [["eu4", 6], ["civ5", 7], ["ageOfEmpires", 8]],
+        "minatureGames": [["warhammer40k", 9], ["warmachine", 10]]
 
-    fake_dataset_creator = fake_demand(number_rows, years, products, cities)
-    fake_dataset_creator.mock_data_products()
-    fake_dataset_creator.mock_data_cities()
+    }
+
+    fake_dataset_creator = fakeDemand(numberRows, years, products, productCategories)
+    fake_dataset_creator.mockData()
 
 
 
