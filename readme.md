@@ -1,8 +1,8 @@
 # Product dataset generator
 
 This python script is written to be used as a random dataset generator for learning data engineering projects.
-It generates a dataset with the columns defined below. Keep in mind that some columns intentionally have mistakes.
-This is done for learning purposes.
+It generates a dataset with the columns defined below. 
+It is possible to generate a clean dataSet, that can be used to practice SQl  or to generate a dirty dataset which can be used to practice data engineering
 
 ## The dataset
 

@@ -13,12 +13,12 @@ class fakeDemand:
         self.fake = Faker('nl_NL')
 
 
-    def mockData(self):
+    def mockDataDirty(self):
         data = []
         for year in self.years:
             startDate = datetime(year, 1, 1)
             endDate = datetime(year, 12, 31)
-            location = f'data/mockdataset_{year}.csv'
+            location = f'data/mockProductData_{year}.csv'
             for _ in range(self.number):
                 customerId = self.fake.random_int(min=1, max=self.number)
                 customerName = self.fake.name()
@@ -35,10 +35,33 @@ class fakeDemand:
             df = pd.DataFrame(data)
             df.to_csv(location, index=False)
 
+    def mockDataClean(self):
+        data = []
+        for year in self.years:
+            startDate = datetime(year, 1, 1)
+            endDate = datetime(year, 12, 31)
+            location = f'data/mockProductDataClean_{year}.csv'
+            for i in range(self.number):
+                customerId = i
+                customerName = self.fake.name()
+                customerEmail = self.fake.email(safe=False)
+                orderDate = self.fake.date_between_dates(date_start=startDate, date_end =endDate)
+                productCategory = random.choice(self.productCategories)
+                pickedProduct = random.choice(self.products[productCategory])
+                productName = pickedProduct[0]
+                productId = pickedProduct[1]
+                productPrice = pickedProduct[2]
+                row = [customerId, customerName, customerEmail, orderDate,productId,  productName, productCategory, productPrice]
+                data.append(row)
+
+            df = pd.DataFrame(data)
+            df.to_csv(location, index=False)
 
 
-def main():
-    """
+
+def main(cleanData = False):
+    """ 
+        @cleanData: boolean that determines if the data is clean or not
         @number: How many times a fake row is created.
         @years: a list of years, for each year a dataset is created.
         @products: Define the product that are used by the dataset.
@@ -57,7 +80,12 @@ def main():
     }
 
     fake_dataset_creator = fakeDemand(numberRows, years, products, productCategories)
-    fake_dataset_creator.mockData()
+
+    if cleanData == False:
+        fake_dataset_creator.mockDataDirty()
+    else:
+        fake_dataset_creator.mockDataClean()
+
 
 
 
