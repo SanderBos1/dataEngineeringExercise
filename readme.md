@@ -7,16 +7,18 @@ The data set is artifically "decleaned" so that it can serve this purpose.
 
 ## Columns
 
-column_id: The id of the user
-customer_name: The name of the customer
-customer_email: The email of the customer
-order_data: The date on which a product is ordered
-product_id: The id of a product
-product_name: The name of a product
-product_price: The price of a product 
+- column_id: The id of the user
+- customer_name: The name of the customer
+- customer_email: The email of the customer
+- order_data: The date on which a product is ordered
+- product_id: The id of a product
+- product_name: The name of a product
+- product_price: The price of a product 
 
-## Columns after "corrupting"
-product_price: Choose the percentage of values that are set to -1
-customer_name: Choose the percentage of values that are set to None
-
-
+## How to run
+- Download the code from this github page
+- Look at the variables in main.py and change to your liking
+- install a vm with the command make make_vm
+- Install the dependencies using the requirement file
+- Execute main.py
+- The resulting files can be found in the output folder
