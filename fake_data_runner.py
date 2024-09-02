@@ -112,6 +112,8 @@ class TestDataProducer:
 
         file_list = os.listdir(save_directory)
         for file in file_list:
+            if not file.endswith(".csv"):
+                continue
             year = file.split("_")[0]
             df = pd.read_csv(f"{save_directory}/{file}")
             helper_mock_data = HelperMockData()
