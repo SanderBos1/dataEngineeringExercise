@@ -1,17 +1,22 @@
 # Product dataset generator
 
-This python script is written to be used as a random dataset generator for learning data engineering projects.
-It generates a dataset with the columns defined below. 
-It is possible to generate a clean dataSet, that can be used to practice SQl  or to generate a dirty dataset which can be used to practice data engineering
+When discovering new applications as a data engineer, it is sometimes hard to exactly pinpoint the difference.
+Reading capabilities and going over the new application using clean test data does not give you enough information.
+This script is build to generate a product orders dataset that can be used to test new applications.
+The data set is artifically "decleaned" so that it can serve this purpose.
 
-## The dataset
+## Columns
 
-- customerId: The Id of a customer. Issue: does not have to be unique
-- customerName: The name of the customer
-- customerEmail: The email of the customer. Issue: can have special characters
-- orderDate:  The date for which a product is ordered 
-- productId: The id of the product that is ordered
-- productName: The name of the ordered product. Issue: Can be Nan, which indicates a mistake
-- productCategory: The category of the ordered product
-- productPrice : The price of the ordered product. Issue: can be -1, which indicates a mistake
+column_id: The id of the user
+customer_name: The name of the customer
+customer_email: The email of the customer
+order_data: The date on which a product is ordered
+product_id: The id of a product
+product_name: The name of a product
+product_price: The price of a product 
+
+## Columns after "corrupting"
+product_price: Choose the percentage of values that are set to -1
+customer_name: Choose the percentage of values that are set to None
+
 

@@ -6,6 +6,8 @@ install:
 make_vm:
 	python -m venv venv
 
+make test:
+	python -m pytest	
 
 stream:
 	uvicorn streamingfakeData:app --reload

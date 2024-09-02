@@ -1,7 +1,5 @@
-Faker
-pandas
-azure-eventhub
-azure-identity 
-azure-identity
-python-dotenv
-aiohttp
+Faker==28.1.0
+pandas==2.2.2
+python-dotenv==1.0.1
+pytest==8.3.2
+numpy==2.0.0
